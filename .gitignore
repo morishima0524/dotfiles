@@ -1,6 +1,8 @@
 # Bundle files
 /vimfiles/bundle/
 
+# vim backup files
+*~
 
 # Windows image file caches
 Thumbs.db
