@@ -1,19 +1,3 @@
-set nocompatible
-filetype off
-
-set rtp+=~/.vim/vundle.git
-call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
-
-Plugin 'autofmt'
-Plugin 'hirono/vimdoc_ja', {'name': 'vimdoc-ja'}
-
-"Plugin 'Shougo/vimproc.vim'
-"Plugin 'umey111/vimproc64'
-
-call vundle#end()
-filetype plugin indent on
-
 scriptencoding utf-8
 " vim:set ts=8 sts=2 sw=2 tw=0: (この行に関しては:help modelineを参照)
 "
@@ -168,7 +152,7 @@ set formatoptions+=mM
 " GUI固有ではない画面表示の設定:
 "
 " 行番号 (number:表示, nonumber:非表示)
-set number
+set nonumber
 " ルーラーを表示 (noruler:非表示)
 set ruler
 " タブや改行を表示 (list:表示)
