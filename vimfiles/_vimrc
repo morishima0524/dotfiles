@@ -1,10 +1,11 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle.git
+set rtp+=~/.vim/bundle/Vundle.vim " vundleのインストール先
 call vundle#begin()
-Plugin 'gmarik/Vundle.vim'
+Plugin 'VundleVim/Vundle.vim'
 
+" （GitHubから見つけてこれた）香り屋デフォルトプラグインを導入
 Plugin 'autofmt'
 Plugin 'hirono/vimdoc_ja', {'name': 'vimdoc-ja'}
 
@@ -26,6 +27,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set number
+set clipboard=unnamed,autoselect
 
 " indent guide options
 colorscheme default
@@ -33,4 +35,7 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
-
+" may map
+inoremap jj <ESC>
+noremap <CR> o<ESC>
+noremap <silent> <C-T> :NERDTreeToggle<CR>
