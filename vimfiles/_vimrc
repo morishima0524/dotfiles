@@ -13,6 +13,9 @@ Plugin 'scrooloose/nerdtree'
 " Indent Seeing
 Plugin 'nathanaelkane/vim-indent-guides'
 
+" Xml
+Plugin 'vim-scripts/xmledit'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -35,11 +38,13 @@ let g:indent_guides_guide_size=1
 inoremap jj <ESC>
 nnoremap <silent><CR> o<ESC>
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
+nnoremap <silent>j gj
+nnoremap <silent>k gk
 
 " disable undo file
 set undodir=
 
 " ウインドウの幅
-set columns=100
+set columns=120
 " ウインドウの高さ
-set lines=35
+set lines=40
