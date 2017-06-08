@@ -16,15 +16,30 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " Xml
 Plugin 'vim-scripts/xmledit'
 
+" Velocity
+Plugin 'lepture/vim-velocity'
+
+Plugin 'vim-scripts/TortoiseSVN.vim'
+
 call vundle#end()
 filetype plugin indent on
 
+:let g:tortoiseSvnCmd='c:\Program Files\TortoiseSVN\bin\TortoiseProc.exe'
+:let g:NERDTreeDirArrows=1
+:let g:NERDTreeDirArrowExpandable='>'
+:let g:NERDTreeDirArrowCollapsible='v'
+
 " edit settings
-set tabstop=4
-set shiftwidth=4
+set tabstop=4 " tab width on screen
+set shiftwidth=4 " tab width auto indent
+set expandtab " tab to space
+augroup fileTypeIndent
+    autocmd!
+    autocmd BufNewFile,BufRead *.xml setlocal noexpandtab
+augroup END
+
 "自動折り返しを無効化
 set textwidth=0
-set expandtab
 set number
 set clipboard=unnamed,autoselect
 
@@ -34,17 +49,32 @@ let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
+" Velocity
+au BufRead,BufNewFile *.vm set ft=html syntax=velocity
+
+
 " Mapping
 inoremap jj <ESC>
 nnoremap <silent><CR> o<ESC>
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
 nnoremap <silent>j gj
 nnoremap <silent>k gk
+nmap <F2> :tabnew $MYVIMRC<CR>
 
 " disable undo file
 set undodir=
+set undofile
+" disable backup
+"set nobackup
 
 " ウインドウの幅
-set columns=120
+set columns=150
 " ウインドウの高さ
-set lines=40
+set lines=55
+
+" auto reload .vimrc
+augroup source-vimrc
+  autocmd!
+  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+  "autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+augroup END
