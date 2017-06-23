@@ -21,6 +21,9 @@ Plugin 'lepture/vim-velocity'
 
 Plugin 'vim-scripts/TortoiseSVN.vim'
 
+" propertiesƒtƒ@ƒCƒ‹“Ç‚İ‚İ
+Plugin 'kamichidu/vim-edit-properties'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -41,7 +44,8 @@ augroup END
 "©“®Ü‚è•Ô‚µ‚ğ–³Œø‰»
 set textwidth=0
 set number
-set clipboard=unnamed,autoselect
+set clipboard=unnamed
+set wrap
 
 " indent guide options
 colorscheme default
@@ -55,11 +59,13 @@ au BufRead,BufNewFile *.vm set ft=html syntax=velocity
 
 " Mapping
 inoremap jj <ESC>
-nnoremap <silent><CR> o<ESC>
+nnoremap <silent><S-CR> o<ESC>
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
 nnoremap <silent>j gj
 nnoremap <silent>k gk
 nmap <F2> :tabnew $MYVIMRC<CR>
+" grep next
+map gn :cn<CR>
 
 " disable undo file
 set undodir=
