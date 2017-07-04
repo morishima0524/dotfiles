@@ -40,6 +40,9 @@ augroup fileTypeIndent
     autocmd!
     autocmd BufNewFile,BufRead *.xml setlocal noexpandtab
 augroup END
+" show white space
+set list
+set listchars=tab:>_,trail:_
 
 "自動折り返しを無効化
 set textwidth=0
@@ -47,11 +50,12 @@ set number
 set clipboard=unnamed
 set wrap
 
-" indent guide options
+" indent guide options(:h indent_guides)
 colorscheme default
 let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=1
+let g:indent_guides_guide_size=2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
 
 " Velocity
 au BufRead,BufNewFile *.vm set ft=html syntax=velocity
@@ -66,6 +70,7 @@ nnoremap <silent>k gk
 nmap <F2> :tabnew $MYVIMRC<CR>
 " grep next
 map gn :cn<CR>
+map gp :cp<CR>
 
 " disable undo file
 set undodir=
@@ -76,7 +81,7 @@ set undofile
 " ウインドウの幅
 set columns=150
 " ウインドウの高さ
-set lines=55
+set lines=45
 
 " auto reload .vimrc
 augroup source-vimrc
