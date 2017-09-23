@@ -1,8 +1,9 @@
 set nocompatible
+set modeline
 
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim " vundleのインストール先
+set rtp+=~/.vim/bundle/Vundle.vim " Install dir for vundle
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
@@ -21,7 +22,10 @@ Plugin 'lepture/vim-velocity'
 
 Plugin 'vim-scripts/TortoiseSVN.vim'
 
-" propertiesファイル読み込み
+" Alignment
+Plugin 'junegunn/vim-easy-align'
+
+" Read properties file
 Plugin 'kamichidu/vim-edit-properties'
 
 call vundle#end()
@@ -44,22 +48,49 @@ augroup fileTypeIndent
     autocmd!
     autocmd BufNewFile,BufRead *.xml setlocal noet "noexpandtab
 augroup END
-"" Disable auto formatting on long line
+"" Disable auto formatting on long line(tw)
 set textwidth=0
-"" Show line number
+"" Show line number(nu)
 set number
 "" Share OS clipboard
 set clipboard=unnamed
-"" Wrap too long line
+"" Soft wrap when over editor area
 set wrap
 "" Disable auto insert comment characters
-"set fo-=ro " not working
+"set fo-=ro " but not working
+"" show white space
+set list
+set listchars=tab:>_,trail:_
 
-" indent guide options
+" Highlignt current cursor line(cul)
+set cursorline
+augroup cursorline
+    au!
+    au BufNewFile,BufRead * call s:set_cursorline()
+    function! s:set_cursorline()
+        hi clear CursorLine
+        hi CursorLineNr ctermbg=DarkGreen
+    endfunction
+augroup END
+
+" ZIPC special settings
+augroup zipcType
+    autocmd!
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set ft=c 
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fencs=cp932
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fenc=cp932
+augroup END
+
+" indent guide options(:h indent_guides)
 colorscheme default
 let g:indent_guides_enable_on_vim_startup=1
-let g:indent_guides_start_level=2
-let g:indent_guides_guide_size=1
+let g:indent_guides_start_level=1
+let g:indent_guides_guide_size=2
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree']
+
+" Alignment
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Velocity
 aug filetypeplugin
@@ -82,6 +113,7 @@ nnoremap <silent>k gk
 nmap <F2> :tabnew $MYVIMRC<CR>
 "" grep next
 map gn :cn<CR>
+map gp :cp<CR>
 
 " disable undo file
 set undodir=
@@ -92,7 +124,7 @@ set undofile
 " ウインドウの幅
 set columns=150
 " ウインドウの高さ
-set lines=55
+set lines=45
 
 " Auto reload .vimrc when save
 augroup source-vimrc
