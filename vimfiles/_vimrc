@@ -33,19 +33,27 @@ filetype plugin indent on
 :let g:NERDTreeDirArrowCollapsible='v'
 
 " edit settings
-set tabstop=4 " tab width on screen
-set shiftwidth=4 " tab width auto indent
-set expandtab " tab to space
+"" tab width on screen
+set tabstop=4
+"" tab width auto indent
+set shiftwidth=4
+"" tab to space
+set expandtab
+"" Use tab on XML editing
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.xml setlocal noexpandtab
+    autocmd BufNewFile,BufRead *.xml setlocal noet "noexpandtab
 augroup END
-
-"自動折り返しを無効化
+"" Disable auto formatting on long line
 set textwidth=0
+"" Show line number
 set number
+"" Share OS clipboard
 set clipboard=unnamed
+"" Wrap too long line
 set wrap
+"" Disable auto insert comment characters
+"set fo-=ro " not working
 
 " indent guide options
 colorscheme default
@@ -54,17 +62,25 @@ let g:indent_guides_start_level=2
 let g:indent_guides_guide_size=1
 
 " Velocity
-au BufRead,BufNewFile *.vm set ft=html syntax=velocity
+aug filetypeplugin
+    au! BufRead,BufNewFile *.vm
+    au BufRead,BufNewFile *.vm set ft=html syntax=velocity
+aug end
 
 
 " Mapping
 inoremap jj <ESC>
+"" Add blank line
 nnoremap <silent><S-CR> o<ESC>
+"" Toggle directory window
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
+"" Move down(visual line)
 nnoremap <silent>j gj
+"" Move up(visual line)
 nnoremap <silent>k gk
+"" Open _vimrc
 nmap <F2> :tabnew $MYVIMRC<CR>
-" grep next
+"" grep next
 map gn :cn<CR>
 
 " disable undo file
@@ -78,7 +94,7 @@ set columns=150
 " ウインドウの高さ
 set lines=55
 
-" auto reload .vimrc
+" Auto reload .vimrc when save
 augroup source-vimrc
   autocmd!
   autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
