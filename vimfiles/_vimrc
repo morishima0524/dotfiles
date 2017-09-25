@@ -37,37 +37,37 @@ filetype plugin indent on
 :let g:NERDTreeDirArrowCollapsible='v'
 
 " edit settings
-set tabstop=4 " tab width on screen
-set shiftwidth=4 " tab width auto indent
-set expandtab " tab to space
+"" tab width on screen
+set tabstop=4
+"" tab width auto indent
+set shiftwidth=4
+"" tab to space
+set expandtab
+"" Use tab on XML editing
 augroup fileTypeIndent
     autocmd!
-    autocmd BufNewFile,BufRead *.xml setlocal noexpandtab
+    autocmd BufNewFile,BufRead *.xml setlocal noet "noexpandtab
 augroup END
-augroup zipcType
-    autocmd!
-    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set ft=c 
-    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fencs=cp932
-    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fenc=cp932
-augroup END
-" show white space
+"" Disable auto formatting on long line(tw)
+set textwidth=0
+"" Show line number(nu)
+set number
+"" Share OS clipboard
+set clipboard=unnamed
+"" Soft wrap when over editor area
+set wrap
+"" Disable auto insert comment characters
+"set fo-=ro " but not working
+"" show white space
 set list
 set listchars=tab:>_,trail:_
 
-" Disable auto wrapping(tw)
-set tw=0
-" Show line number(nu)
-set number
-" Enable os clipboard
-set clipboard=unnamed
-" Soft wrap when over editor area
-set wrap
-" Cursor position always center(so)
-set scrolloff=999
+" Cursor position never top/end(so)
+set scrolloff=5
 
 " Color setting
 colorscheme blue
-" Highlignt current cursor line(cul)
+"" Highlignt current cursor line(cul)
 set cursorline
 set cursorcolumn
 augroup my_cursorline
@@ -83,6 +83,14 @@ augroup my_cursorline
     endfunction
 augroup END
 
+" ZIPC special settings
+augroup zipcType
+    autocmd!
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set ft=c 
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fencs=cp932
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fenc=cp932
+augroup END
+
 " indent guide options(:h indent_guides)
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=1
@@ -94,17 +102,25 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " Velocity
-au BufRead,BufNewFile *.vm set ft=html syntax=velocity
+aug filetypeplugin
+    au! BufRead,BufNewFile *.vm
+    au BufRead,BufNewFile *.vm set ft=html syntax=velocity
+aug end
 
 
 " Mapping
 inoremap jj <ESC>
+"" Add blank line
 nnoremap <silent><S-CR> o<ESC>
+"" Toggle directory window
 nnoremap <silent><C-t> :NERDTreeToggle<CR>
+"" Move down(visual line)
 nnoremap <silent>j gj
+"" Move up(visual line)
 nnoremap <silent>k gk
+"" Open _vimrc
 nmap <F2> :tabnew $MYVIMRC<CR>
-" grep next
+"" grep next
 map gn :cn<CR>
 map gp :cp<CR>
 
@@ -119,7 +135,7 @@ set columns=150
 " ウインドウの高さ
 set lines=45
 
-" auto reload .vimrc
+" Auto reload .vimrc when save
 augroup source-vimrc
     autocmd!
     autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
