@@ -62,19 +62,28 @@ set number
 set clipboard=unnamed
 " Soft wrap when over editor area
 set wrap
+" Cursor position always center(so)
+set scrolloff=999
+
+" Color setting
+colorscheme blue
 " Highlignt current cursor line(cul)
 set cursorline
-augroup cursorline
-    au!
-    au BufNewFile,BufRead * call s:set_cursorline()
+set cursorcolumn
+augroup my_cursorline
+    autocmd!
+    autocmd BufNewFile,BufRead,VimEnter * call s:set_cursorline()
+    autocmd BufWritePost *vimrc call s:set_cursorline()
     function! s:set_cursorline()
         hi clear CursorLine
+"        hi Normal ctermfg=White
+"        hi CursorLine ctermbg=DarkGrey
         hi CursorLineNr ctermbg=DarkGreen
+        hi Error ctermfg=Black
     endfunction
 augroup END
 
 " indent guide options(:h indent_guides)
-colorscheme default
 let g:indent_guides_enable_on_vim_startup=1
 let g:indent_guides_start_level=1
 let g:indent_guides_guide_size=2
@@ -112,7 +121,7 @@ set lines=45
 
 " auto reload .vimrc
 augroup source-vimrc
-  autocmd!
-  autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
-  "autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
+    autocmd!
+    autocmd BufWritePost *vimrc source $MYVIMRC | set foldmethod=marker
+    "autocmd BufWritePost *gvimrc if has('gui_running') source $MYGVIMRC
 augroup END
