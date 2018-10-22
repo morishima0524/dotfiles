@@ -37,9 +37,9 @@ filetype plugin indent on
 :let g:NERDTreeDirArrowCollapsible='v'
 
 " edit settings
-"" tab width on screen
+"" tab width on press tab key(ts)
 set tabstop=4
-"" tab width auto indent
+"" tab width auto indent and > command(sw)
 set shiftwidth=4
 "" tab to space
 set expandtab
@@ -65,9 +65,12 @@ set listchars=tab:>_,trail:_
 " Cursor position never top/end(so)
 set scrolloff=5
 
+" File encodings
+set fileencodings=ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis,utf-8,cp932
+
 " Color setting
-colorscheme blue
-"" Highlignt current cursor line(cul)
+colorscheme darkblue
+"" Highlight current cursor line(cul)
 set cursorline
 set cursorcolumn
 augroup my_cursorline
@@ -86,9 +89,9 @@ augroup END
 " ZIPC special settings
 augroup zipcType
     autocmd!
+    "autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fencs=cp932,utf-8
     autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set ft=c 
-    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fencs=cp932
-    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow set fenc=cp932
+    autocmd BufNewFile,BufRead *.func,*.str,*.var,*.def,*.flow setl fenc=cp932
 augroup END
 
 " indent guide options(:h indent_guides)
@@ -121,20 +124,25 @@ nnoremap <silent>k gk
 "" Open _vimrc
 nmap <F2> :tabnew $MYVIMRC<CR>
 "" grep next
-map gn :cn<CR>
+map gn :w<BAR>:cn<CR>
 map gp :cp<CR>
 
 " disable undo file
 set undodir=
 set undofile
 " disable backup
-"set nobackup
+set nobackup
 
 " ウインドウの幅
 set columns=150
 " ウインドウの高さ
 set lines=45
 
+" markdown settings
+augroup markdown
+    autocmd!
+    autocmd BufNewFile,BufRead *.md se ts=1 sw=1
+augroup END
 " Auto reload .vimrc when save
 augroup source-vimrc
     autocmd!
